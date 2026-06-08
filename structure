@@ -1,0 +1,43 @@
+src/
+│
+├── app/
+│   ├── dashboard/
+│   ├── auth/
+│   └── api/
+│
+├── features/
+│   ├── auth/
+│   │   ├── components/
+│   │   ├── actions/
+│   │   ├── hooks/
+│   │   ├── types.ts
+│   │   └── validation.ts
+│   │
+│   ├── projects/
+│   │   ├── components/
+│   │   ├── actions/
+│   │   ├── services/
+│   │   ├── types.ts
+│   │   └── validation.ts
+│   │
+│   └── users/
+│
+├── components/
+│   ├── ui/
+│   └── layout/
+│
+├── lib/
+│   ├── supabase/
+│   │   ├── client.ts
+│   │   ├── server.ts
+│   │   └── middleware.ts
+│   │
+│   ├── utils.ts
+│   └── constants.ts
+│
+├── types/
+│   │
+│   ├── auth.ts
+│   └── database.ts
+│
+└── middleware.ts

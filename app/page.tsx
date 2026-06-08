@@ -1,15 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from 'next/font/google';
-// Importing specific Lucide icons for the cards and features
-import { 
-  Users, 
-  UserRound, 
-  ClipboardCheck, 
-  BarChart3, 
-  HeartHandshake, 
-  ShieldCheck 
-} from "lucide-react";
+import { Users, UserRound, ClipboardCheck, BarChart3, HeartHandshake, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/navbar";
 import hero_right_illustration from "@/assets/hero_right_illustration.png";
 
@@ -24,7 +16,7 @@ export default function Home() {
         {/* Left Column: Text and Selection Cards */}
         <div className="flex-1 space-y-8">
           <div className="space-y-4">
-            <h1 className="text-4xl lg:text-7xl font-bold tracking-tight text-gray-900 leading-tight">
+            <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
               Better support.<br />Better outcomes.
             </h1>
             <p className="text-xl text-gray-600 max-w-xl">
@@ -38,7 +30,7 @@ export default function Home() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
               {/* Parent Card */}
-              <Link href="/for-parents" className="flex flex-col items-center group border border-gray-200 rounded-2xl p-6 hover:border-blue-600 hover:shadow-md transition-all">
+              <Link href="/signup/parent" className="flex flex-col items-center group border border-gray-200 rounded-2xl p-6 hover:border-blue-600 hover:shadow-md transition-all">
                 <div className="mb-4">
                   <Users className="w-8 h-8 text-gray-400 group-hover:text-blue-600" />
                 </div>
@@ -47,7 +39,7 @@ export default function Home() {
               </Link>
 
               {/* Professional Card */}
-              <Link href="/for-professionals" className="flex flex-col items-center group border border-gray-200 rounded-2xl p-6 hover:border-blue-600 hover:shadow-md transition-all">
+              <Link href="/signup/professional" className="flex flex-col items-center group border border-gray-200 rounded-2xl p-6 hover:border-blue-600 hover:shadow-md transition-all">
                 <div className="mb-4">
                   <UserRound className="w-8 h-8 text-gray-400 group-hover:text-blue-600" />
                 </div>
@@ -55,6 +47,9 @@ export default function Home() {
                 <p className="text-sm text-gray-500">Manage my clients and track their progress</p>
               </Link>
             </div>
+            <Link href="/login" className="text-sm font-medium flex justify-center hover:underline">
+                Already have an account?&nbsp;<span className="font-bold">Log in</span>
+            </Link>
           </div>
 
           {/* Bottom Features Highlight */}
@@ -75,12 +70,13 @@ export default function Home() {
         </div>
 
         {/* Right Column: Hero Illustration */}
-        <div className="flex-1 w-full lg:w-auto flex justify-center items-center">
+        <div className="flex-1 w-full lg:w-auto flex justify-center items-center lg:border-l lg:border-gray-200 lg:pl-12">
           <div className="relative w-full max-w-lg aspect-square hidden lg:block">
             <Image 
               src={hero_right_illustration} 
               alt="Family and Professional collaborative illustration"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-contain"
               priority
             />
@@ -89,11 +85,17 @@ export default function Home() {
       </section>
 
       {/* Hero Footer Disclaimer */}
-      <div className="w-full text-center py-6">
-        <p className="flex items-center justify-center gap-2 text-xs text-gray-400 uppercase tracking-widest">
-          <ShieldCheck/>
-          Secure. Private. Built for Better Care.
-        </p>
+      <div className="w-full py-6">
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px w-20 bg-gray-200" />
+
+          <p className="flex items-center gap-2 text-xs text-gray-400 uppercase tracking-widest">
+            <ShieldCheck className="w-4 h-4" />
+            Secure. Private. Built for Better Care.
+          </p>
+
+          <div className="h-px w-20 bg-gray-200" />
+        </div>
       </div>
     </main>
   );
