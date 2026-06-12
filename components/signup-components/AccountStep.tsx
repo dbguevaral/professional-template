@@ -1,16 +1,27 @@
-export default function SignUpCard() {
+'use client';
+import { useFormContext } from "react-hook-form";
+
+export default function AccountStep({ onNext }: { onNext: () => void }) { 
+    // access the parent form state
+    const { register, trigger, formState: { errors } } = useFormContext();
+
+    const handleNext = async () => {
+        //manually trigger validation only for the fields in this step
+        const isValid = await trigger(["email", "password", "parentLastName", "parentFirstName"]);
+        if (isValid) onNext();
+    }
     return (
-        <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        <div>
             <div className="mb-8 text-center">
                 <h1 className="text-3xl font-bold tracking-tight">
                 Create Your Account
                 </h1>
                 <p className="mt-2 text-sm text-gray-500">
-                Enter your details to create your account.
+                Enter your details to create your account
                 </p>
             </div>
 
-            <form className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
                 <div className="space-y-2">
                 <label
                     htmlFor="first_name"
@@ -20,12 +31,11 @@ export default function SignUpCard() {
                 </label>
 
                 <input
-                    type="text"
-                    id="first_name"
-                    name="first_name"
+                    {...register("parentFirstName")}
                     placeholder="Enter your first name"
                     className="h-11 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none transition focus:border-black"
                 />
+                {errors.parentFirstName && <p className="text-red-500 text-xs mt-1">{errors.parentFirstName.message as string}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -37,12 +47,11 @@ export default function SignUpCard() {
                 </label>
 
                 <input
-                    type="text"
-                    id="last_name"
-                    name="last_name"
+                    {...register("parentLastName")}
                     placeholder="Enter your last name"
                     className="h-11 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none transition focus:border-black"
                 />
+                {errors.parentLastName && <p className="text-red-500 text-xs mt-1">{errors.parentLastName.message as string}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -54,12 +63,11 @@ export default function SignUpCard() {
                 </label>
 
                 <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    {...register("email")}
                     placeholder="Enter your email"
                     className="h-11 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none transition focus:border-black"
                 />
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message as string}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -72,8 +80,7 @@ export default function SignUpCard() {
 
                 <input
                     type="password"
-                    id="password"
-                    name="password"
+                    {...register("password")}
                     placeholder="Create a password"
                     className="h-11 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none transition focus:border-black"
                 />
@@ -89,7 +96,7 @@ export default function SignUpCard() {
 
                 <input
                     type="password"
-                    id="confirm_password"
+                    {...register("confirmPassword")}
                     name="confirm_password"
                     placeholder="Confirm your password"
                     className="h-11 w-full rounded-xl border border-gray-300 px-4 text-sm outline-none transition focus:border-black"
@@ -98,11 +105,12 @@ export default function SignUpCard() {
 
                 <button
                 type="submit"
+                onClick={handleNext}
                 className="mt-2 h-11 rounded-xl bg-black text-sm font-medium text-white transition hover:opacity-90"
                 >
-                Next
+                Create Account
                 </button>
-            </form>
+            </div>
         </div>
-    );
-    }
+    )
+}
